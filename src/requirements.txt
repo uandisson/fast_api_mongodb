@@ -1,0 +1,9 @@
+# [Start] FastApi Depedencies
+fastapi>=0.70.1
+uvicorn>=0.16.0
+pydantic>=1.8.2
+# [End] MongoDB Depedencies
+
+# [Start] MongoDB Depedencies
+pymongo[srv]>=4.0.1
+# [End] MongoDB Depedencies

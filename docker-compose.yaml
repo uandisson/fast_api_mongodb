@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+ backend_app:
+  container_name: backend_fast_api
+  build: .
+  environment:
+      - MONGODB_URL=mongodb://db:27017
+      - MONGODB_DATABASE=backend_db
+  ports:
+    - "8000:8000"
+  command: uvicorn main:app --host 0.0.0.0 --reload --debug
+  links:
+    - db
+  networks:
+    - backend-nt
+
+ db:
+  image: mongo:latest
+  container_name: backend_mongo
+  environment:
+    MONGODB_DATA_DIR: /data/db
+    MONDODB_LOG_DIR: /dev/null
+  volumes:
+    - .:/opt/backend-fast-api-app/dev/api/data
+  ports:
+    - 27017:27017
+  networks:
+    - backend-nt
+
+networks:
+  backend-nt:
+    driver: bridge
